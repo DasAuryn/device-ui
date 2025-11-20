@@ -80,7 +80,7 @@ constexpr lv_color_t colorGray = LV_COLOR_HEX(0x757575);
 constexpr lv_color_t colorLightGray = LV_COLOR_HEX(0xAAFBFF);
 constexpr lv_color_t colorMidGray = LV_COLOR_HEX(0x808080);
 constexpr lv_color_t colorDarkGray = LV_COLOR_HEX(0x303030);
-constexpr lv_color_t colorMesh = LV_COLOR_HEX(0x67ea94);
+constexpr lv_color_t colorMesh = LV_COLOR_HEX(0x2962ff);
 
 // children index of nodepanel lv objects (see addNode)
 enum NodePanelIdx {

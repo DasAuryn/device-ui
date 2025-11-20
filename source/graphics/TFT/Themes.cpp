@@ -96,16 +96,16 @@ enum ThemeColor {
 uint32_t themeColor[][2] = {
     // dark,       light
     {0xff303030, 0xfff4f4f4}, // eMainScreenStyle
-    {0xff436C70, 0xff67ea94}, // eTopPanelBg
+    {0xff436C70, 0xff2962ff}, // eTopPanelBg
     {0xffE0E0E0, 0xff212121}, // eTopPanelText
-    {0xff436C70, 0xff67ea94}, // eTopImageBg
+    {0xff436C70, 0xff2962ff}, // eTopImageBg
     {0xffffffff, 0xff212121}, // eTopImageRecolor
     {255, 255},               // eTopImageRecolorOpa
     {0xffffffff, 0xff212121}, // ePositiveImageRecolor,
     {0xff303030, 0xfff4f4f0}, // ePanelBg
     {0xff303030, 0xfffafafa}, // ePanelPressedBg
     {0xfff0f0f0, 0xff212121}, // ePanelText
-    {0xff67ea94, 0xff67ea94}, // ePanelBorder
+    {0xff2962ff, 0xff2962ff}, // ePanelBorder
     {0xff404040, 0xffffffff}, // eNodePanelBg
     {0xff808080, 0xff979797}, // eNodePanelBorder
     {0xfff0f0f0, 0xff212121}, // eNodePanelText
@@ -114,12 +114,12 @@ uint32_t themeColor[][2] = {
     {0xff585858, 0xffffffff}, // eButtonPanelBg
     {0xff585858, 0xffeaeae0}, // eMainButtonBg
     {0xffaafbff, 0xff101010}, // eMainButtonText
-    {0xff67ea94, 0xff67ea94}, // eMainButtonBorder
+    {0xff2962ff, 0xff2962ff}, // eMainButtonBorder
     {0xff9e9e9e, 0xffc0c0c0}, // eMainButtonShadow
-    {0xff67ea94, 0xff757575}, // eMainButtonImageRecolor
+    {0xff2962ff, 0xff757575}, // eMainButtonImageRecolor
     {0, 255},                 // eMainButtonImageRecolorOpa
     {0xff303030, 0xfffafaf4}, // eHomeContainerBg
-    {0xff67EA94, 0xffaaaaaa}, // eHomeContainerBorder
+    {0xff2962ff, 0xffaaaaaa}, // eHomeContainerBorder
     {0xff2B824A, 0xff999999}, // eHomeContainerShadow
     {0xffaafbff, 0xff294337}, // eHomeContainerText
     {0xff303030, 0xffffffff}, // eHomeButtonBg
@@ -138,7 +138,7 @@ uint32_t themeColor[][2] = {
     {0xff505050, 0xffeaeae0}, // eSettingsButtonBg
     {0xffaafbff, 0xff294337}, // eSettingsButtonText
     {0xff303030, 0xffd0d0d0}, // eSettingsButtonBorder
-    {0, 0xff67ea94},          // eSettingsButtonImageRecolor
+    {0, 0xff2962ff},          // eSettingsButtonImageRecolor
     {0, 255},                 // eSettingsButtonImageRecolorOpa
     {0xff404040, 0xffffffff}, // eSettingsLabelBg
     {0xff404040, 0xff808080}, // eSettingsLabelBorder
@@ -146,7 +146,7 @@ uint32_t themeColor[][2] = {
     {0xffaafbff, 0xff003c9f}, // eTabViewText
     {0xff303030, 0xffe0e0e0}, // eTabButtonDefaultBg
     {0xff303030, 0xffffffff}, // eTabButtonActiveBg
-    {0xff67ea94, 0xffaafbff}, // eTabButtonPressedBg
+    {0xff2962ff, 0xffaafbff}, // eTabButtonPressedBg
     {0xffA0A0A0, 0xff606060}, // eTabButtonDefaultText
     {0xffffffff, 0xff101010}, // eTabButtonActiveText
     {0xffffffff, 0xffffffff}, // eTabButtonPressedText
@@ -161,13 +161,13 @@ uint32_t themeColor[][2] = {
     {0xff808080, 0xff888888}, // eNewMessageBorder
     {0xff303030, 0xfffbfbfb}, // eAlertPanelBg
     {0xff303030, 0xfff4f4f4}, // eBtnMatrixBorderMain
-    {0xff67ea94, 0xff67ea94}, // eBtnMatrixBorderItems
+    {0xff2962ff, 0xff2962ff}, // eBtnMatrixBorderItems
     {0xff606060, 0xfffffff8}, // eBtnMatrixBgItems
     {0xffaafbff, 0xff212121}, // eBtnMatrixTextItems
     {0xffaafbff, 0xff212121}, // eBatteryPercentageText
     {0xffaafbff, 0xff003c9f}, // eColorTextLabel
     {0xff404040, 0xffe0e0e0}, // eSpinnerMainArc
-    {0xff67ea94, 0xff67ea94}, // eSpinnerIndicatorArc
+    {0xff2962ff, 0xff2962ff}, // eSpinnerIndicatorArc
     {0xffaafbff, 0xff212121}, // eTableHeadingText,
     {0xff303030, 0xfff4f4f0}, // eTableHeadingBg
     {0xffaafbff, 0xff212121}, // eTableItemText,
@@ -433,7 +433,7 @@ void Themes::initStyles(void)
     lv_style_set_text_color(&style_btn_active, lv_color_hex(THEME(eTabButtonActiveText)));
     lv_style_set_bg_color(&style_btn_active, lv_color_hex(THEME(eTabButtonActiveBg)));
     lv_style_set_bg_opa(&style_btn_active, LV_OPA_COVER);
-    lv_style_set_border_color(&style_btn_active, lv_color_hex(0xff67ea94));
+    lv_style_set_border_color(&style_btn_active, lv_color_hex(0xff2962ff));
     lv_style_set_border_opa(&style_btn_active, LV_OPA_COVER);
     lv_style_set_border_width(&style_btn_active, 3);
     lv_style_set_border_side(&style_btn_active, LV_BORDER_SIDE_BOTTOM);
@@ -442,7 +442,7 @@ void Themes::initStyles(void)
     lv_style_set_text_color(&style_btn_pressed, lv_color_hex(THEME(eTabButtonPressedText)));
     lv_style_set_bg_color(&style_btn_pressed, lv_color_hex(THEME(eTabButtonPressedBg)));
     lv_style_set_bg_opa(&style_btn_pressed, LV_OPA_COVER);
-    lv_style_set_border_color(&style_btn_pressed, lv_color_hex(0xff67ea94));
+    lv_style_set_border_color(&style_btn_pressed, lv_color_hex(0xff2962ff));
     lv_style_set_border_opa(&style_btn_pressed, LV_OPA_COVER);
     lv_style_set_border_width(&style_btn_pressed, 3);
     lv_style_set_border_side(&style_btn_pressed, LV_BORDER_SIDE_BOTTOM);
