@@ -80,6 +80,7 @@ void create_screen_boot_screen() {
             lv_obj_set_pos(obj, 0, -24);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_img_set_src(obj, &img_meshtastic_boot_logo_image);
+            lv_image_set_scale(obj, 100);
             lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
         }
         {
