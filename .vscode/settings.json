@@ -12,6 +12,5 @@
   },
   "testMate.cpp.test.executables": "${workspaceFolder}/build/bin/tests",
   "testMate.cpp.discovery.loadOnStartup": true,
-  "cmake.ctest.testExplorerIntegrationEnabled": false,
-  "idf.pythonInstallPath": "C:\\Espressif\\tools\\idf-python\\3.11.2\\python.exe"
+  "cmake.ctest.testExplorerIntegrationEnabled": false
 }
