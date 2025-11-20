@@ -28,7 +28,7 @@ void create_screen_boot_screen() {
             lv_obj_t *obj = lv_arc_create(parent_obj);
             objects.boot_logo_arc = obj;
             lv_obj_set_pos(obj, 1, LV_PCT(-8));
-            lv_obj_set_size(obj, 140, 140);
+            lv_obj_set_size(obj, 162, 140);
             lv_arc_set_range(obj, 0, 360);
             lv_arc_set_value(obj, 360);
             lv_arc_set_bg_start_angle(obj, 0);
@@ -47,7 +47,7 @@ void create_screen_boot_screen() {
             lv_obj_t *obj = lv_btn_create(parent_obj);
             objects.boot_logo_button = obj;
             lv_obj_set_pos(obj, 0, LV_PCT(-10));
-            lv_obj_set_size(obj, 144, 144);
+            lv_obj_set_size(obj, 162, 144);
             lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_max_width(obj, 144, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_max_height(obj, 144, LV_PART_MAIN | LV_STATE_DEFAULT);
