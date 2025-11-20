@@ -47,10 +47,10 @@ void create_screen_boot_screen() {
             lv_obj_t *obj = lv_btn_create(parent_obj);
             objects.boot_logo_button = obj;
             lv_obj_set_pos(obj, 0, LV_PCT(-10));
-            lv_obj_set_size(obj, 100, 50);
+            lv_obj_set_size(obj, 144, 144);
             lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_max_width(obj, 210, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_max_height(obj, 120, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_max_width(obj, 144, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_max_height(obj, 144, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_shadow_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
         }
