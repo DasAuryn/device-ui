@@ -384,12 +384,11 @@ uint8_t img_meshtastic_boot_logo_image_map[] = {
 };
 
 const lv_image_dsc_t img_meshtastic_boot_logo_image = {
-  .header.magic = LV_IMAGE_HEADER_MAGIC,
-  .header.cf = LV_COLOR_FORMAT_A8,
-  .header.flags = 0,
+  .header.always_zero = 0,
   .header.w = 162,
   .header.h = 140,
   .data_size = sizeof(img_meshtastic_boot_logo_image_map),
+  .header.cf = LV_IMG_CF_TRUE_COLOR_ALPHA,
   .data = img_meshtastic_boot_logo_image_map,
 };
 
