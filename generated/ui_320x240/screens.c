@@ -21,7 +21,7 @@ void create_screen_boot_screen() {
     lv_obj_set_size(obj, 320, 240);
     lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_set_style_text_font(obj, &ui_font_montserrat_14, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(obj, lv_color_hex(0xff67ea94), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(obj, lv_color_hex(0xff3e2fff), LV_PART_MAIN | LV_STATE_DEFAULT);
     {
         lv_obj_t *parent_obj = obj;
         {
@@ -63,7 +63,14 @@ void create_screen_boot_screen() {
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_set_style_align(obj, LV_ALIGN_BOTTOM_MID, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_text_font(obj, &ui_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text(obj, " www.groupalarm.com");
+            lv_obj_set_style_bg_grad_color(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_bg_color(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_bg_image_recolor(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_shadow_color(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_image_recolor(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_line_color(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "www.groupalarm.com");
         }
         {
             // FirmwareLabel
@@ -131,7 +138,7 @@ void create_screen_boot_screen() {
                     objects.cancel_reboot_button = obj;
                     lv_obj_set_pos(obj, 0, 0);
                     lv_obj_set_size(obj, LV_PCT(100), LV_PCT(100));
-                    lv_obj_set_style_bg_color(obj, lv_color_hex(0xff67ea94), LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_obj_set_style_bg_color(obj, lv_color_hex(0xff174dd5), LV_PART_MAIN | LV_STATE_DEFAULT);
                     lv_obj_set_style_shadow_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                     lv_obj_set_style_shadow_ofs_y(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                     lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -196,7 +203,7 @@ void create_screen_boot_screen() {
                     lv_obj_set_style_align(obj, LV_ALIGN_BOTTOM_MID, LV_PART_MAIN | LV_STATE_DEFAULT);
                     lv_obj_set_style_text_font(obj, &ui_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
                     lv_obj_set_style_text_color(obj, lv_color_hex(0xff000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-                    lv_label_set_text(obj, " www.groupalarm.com");
+                    lv_label_set_text(obj, " www.meshtastic.org");
                 }
                 {
                     // SettingsRebootPanel
@@ -266,7 +273,6 @@ void create_screen_main_screen() {
     objects.main_screen = obj;
     lv_obj_set_pos(obj, 0, 0);
     lv_obj_set_size(obj, 320, 240);
-    lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
     lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
     add_style_main_screen_style(obj);
     {
@@ -1359,6 +1365,7 @@ void create_screen_main_screen() {
             objects.map_panel = obj;
             lv_obj_set_pos(obj, LV_PCT(12), LV_PCT(10));
             lv_obj_set_size(obj, LV_PCT(88), LV_PCT(90));
+            lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
             lv_obj_clear_flag(obj, LV_OBJ_FLAG_CLICKABLE|LV_OBJ_FLAG_CLICK_FOCUSABLE|LV_OBJ_FLAG_GESTURE_BUBBLE|LV_OBJ_FLAG_PRESS_LOCK|LV_OBJ_FLAG_SCROLLABLE|LV_OBJ_FLAG_SCROLL_CHAIN_HOR|LV_OBJ_FLAG_SCROLL_CHAIN_VER|LV_OBJ_FLAG_SCROLL_ELASTIC|LV_OBJ_FLAG_SCROLL_MOMENTUM|LV_OBJ_FLAG_SCROLL_WITH_ARROW|LV_OBJ_FLAG_SNAPPABLE);
             lv_obj_set_scrollbar_mode(obj, LV_SCROLLBAR_MODE_OFF);
             add_style_panel_style(obj);
@@ -6350,16 +6357,6 @@ void create_screen_main_screen() {
 }
 
 void tick_screen_main_screen() {
-    {
-        bool new_val = get_var_true();
-        bool cur_val = lv_obj_has_flag(objects.map_panel, LV_OBJ_FLAG_HIDDEN);
-        if (new_val != cur_val) {
-            tick_value_change_obj = objects.map_panel;
-            if (new_val) lv_obj_add_flag(objects.map_panel, LV_OBJ_FLAG_HIDDEN);
-            else lv_obj_clear_flag(objects.map_panel, LV_OBJ_FLAG_HIDDEN);
-            tick_value_change_obj = NULL;
-        }
-    }
     tick_user_widget_ok_cancel_widget(237);
     tick_user_widget_ok_cancel_widget(258);
     tick_user_widget_ok_cancel_widget(264);
