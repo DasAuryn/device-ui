@@ -1997,6 +1997,11 @@ void TFTView_320x240::ui_event_wifi_button(lv_event_t *e)
         lv_textarea_set_text(objects.settings_wifi_password_textarea, THIS->db.config.network.wifi_psk);
         lv_obj_clear_flag(objects.settings_wifi_panel, LV_OBJ_FLAG_HIDDEN);
         lv_group_focus_obj(objects.settings_wifi_ssid_textarea);
+#ifdef ARDUINO_ARCH_ESP32
+        wifi_ssid_ta = objects.settings_wifi_ssid_textarea;
+        wifi_psk_ta = objects.settings_wifi_password_textarea;
+        start_wifi_scan(objects.settings_wifi_panel); // erzeugt Scan-Button + Liste
+#endif
         THIS->disablePanel(objects.controller_panel);
         THIS->disablePanel(objects.tab_page_basic_settings);
         THIS->activeSettings = eWifi;
