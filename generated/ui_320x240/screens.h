@@ -239,7 +239,6 @@ typedef struct _objects_t {
     lv_obj_t *tools_packet_log_label;
     lv_obj_t *advanced_settings_panel;
     lv_obj_t *top_panel;
-    lv_obj_t *meshtastic_image;
     lv_obj_t *meshtastic_label;
     lv_obj_t *top_nodes_panel;
     lv_obj_t *top_nodes_online_label;
