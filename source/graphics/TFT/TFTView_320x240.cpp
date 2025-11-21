@@ -2069,7 +2069,7 @@ void TFTView_320x240::ui_event_theme_button(lv_event_t *e)
     if (event_code == LV_EVENT_CLICKED && THIS->activeSettings == eNone)
     {
         lv_dropdown_set_selected(objects.settings_theme_dropdown, THIS->db.uiConfig.theme);
-        lv_obj_clear_flag(objects.settings_theme_panel, LV_OBJ_FLAG_HIDDEN);
+        //  lv_obj_clear_flag(objects.settings_theme_panel, LV_OBJ_FLAG_HIDDEN);
         lv_group_focus_obj(objects.settings_theme_dropdown);
         THIS->disablePanel(objects.controller_panel);
         THIS->disablePanel(objects.tab_page_basic_settings);
