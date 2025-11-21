@@ -8203,8 +8203,7 @@ bool TFTView_320x240::updateSDCard(void)
     }
     lv_label_set_text(objects.home_sd_card_label, buf);
 #else
-    lv_obj_add_flag(objects.home_sd_card_button, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_add_flag(objects.home_sd_card_label, LV_OBJ_FLAG_HIDDEN);
+
 #if defined(ARCH_PORTDUINO)
     cardDetected = true; // use PortduinoFS instead
     sdCard = new SDCard;
@@ -8213,6 +8212,8 @@ bool TFTView_320x240::updateSDCard(void)
     if (!sdCard)
         sdCard = new NoSdCard;
     return cardDetected;
+    lv_obj_add_flag(objects.home_sd_card_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.home_sd_card_label, LV_OBJ_FLAG_HIDDEN);
 }
 
 void TFTView_320x240::formatSDCard(void)
