@@ -2063,6 +2063,7 @@ void create_screen_main_screen()
                                     lv_obj_set_style_pad_right(obj, 4, LV_PART_MAIN | LV_STATE_DEFAULT);
                                     lv_obj_set_style_bg_color(obj, lv_color_hex(0xff4db270), LV_PART_MAIN | LV_STATE_PRESSED);
                                     lv_obj_set_style_text_color(obj, lv_color_hex(0xff015114), LV_PART_MAIN | LV_STATE_PRESSED);
+                                    lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
                                     {
                                         lv_obj_t *parent_obj = obj;
                                         {
