@@ -8355,7 +8355,15 @@ static void ensure_wifi_scan_ui(lv_obj_t *parent)
     {
         wifi_scan_btn = lv_btn_create(parent);
         lv_obj_set_size(wifi_scan_btn, 60, 24);
-        lv_obj_align(wifi_scan_btn, LV_ALIGN_TOP_RIGHT, -6, 6);
+
+        if (objects.obj8)
+        {
+            lv_obj_align_to(wifi_scan_btn, objects.obj8, LV_ALIGN_OUT_LEFT_MID, -6, 0);
+        }
+        else
+        {
+            lv_obj_align(wifi_scan_btn, LV_ALIGN_BOTTOM_LEFT, 6, -6);
+        }
 
         lv_obj_t *lbl = lv_label_create(wifi_scan_btn);
         lv_label_set_text(lbl, _("Scan"));
