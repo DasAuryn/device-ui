@@ -166,8 +166,6 @@ typedef struct _objects_t {
     lv_obj_t *chats_button_label;
     lv_obj_t *chat_del_button;
     lv_obj_t *del_label;
-    lv_obj_t *map_panel;
-    lv_obj_t *raw_map_panel;
     lv_obj_t *home_location_image;
     lv_obj_t *gps_position_image;
     lv_obj_t *navigation_panel;
