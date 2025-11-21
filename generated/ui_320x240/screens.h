@@ -65,10 +65,7 @@ extern lv_obj_t * ui_RemoteHardwareLabel;
 
 void create_tabview_settings(void);
 
-typedef struct _objects_t {
-    lv_obj_t *boot_screen;
-    lv_obj_t *main_screen;
-    lv_obj_t *blank_screen;
+typedef struct     lv_obj_t *blank_screen;
     lv_obj_t *lock_screen;
     lv_obj_t *calibration_screen;
     lv_obj_t *boot_logo_arc;
@@ -166,6 +163,8 @@ typedef struct _objects_t {
     lv_obj_t *chats_button_label;
     lv_obj_t *chat_del_button;
     lv_obj_t *del_label;
+    lv_obj_t *map_panel;
+    lv_obj_t *raw_map_panel;
     lv_obj_t *home_location_image;
     lv_obj_t *gps_position_image;
     lv_obj_t *navigation_panel;
@@ -575,6 +574,14 @@ void tick_screen_lock_screen();
 
 void create_screen_calibration_screen();
 void tick_screen_calibration_screen();
+id tick_screen_boot_screen();
+
+void create_screen_main_screen();
+void tick_screen_main_screen();
+id tick_screen_main_screen();
+id tick_screen_main_screen();
+id tick_screen_main_screen();
+oid tick_screen_main_screen();
 
 void create_user_widget_ok_cancel_widget(lv_obj_t *parent_obj, int startWidgetIndex);
 void tick_user_widget_ok_cancel_widget(int startWidgetIndex);
