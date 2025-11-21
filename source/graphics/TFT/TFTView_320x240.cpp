@@ -1713,7 +1713,7 @@ void TFTView_320x240::ui_event_role_button(lv_event_t *e)
     lv_event_code_t event_code = lv_event_get_code(e);
     if (event_code == LV_EVENT_CLICKED && THIS->activeSettings == eNone && THIS->db.config.has_device) {
         lv_dropdown_set_selected(objects.settings_device_role_dropdown, THIS->role2val(THIS->db.config.device.role));
-        lv_obj_clear_flag(objects.settings_device_role_panel, LV_OBJ_FLAG_HIDDEN);
+      //  lv_obj_clear_flag(objects.settings_device_role_panel, LV_OBJ_FLAG_HIDDEN);
         lv_group_focus_obj(objects.settings_device_role_dropdown);
         THIS->disablePanel(objects.controller_panel);
         THIS->disablePanel(objects.tab_page_basic_settings);
@@ -1726,7 +1726,7 @@ void TFTView_320x240::ui_event_region_button(lv_event_t *e)
     lv_event_code_t event_code = lv_event_get_code(e);
     if (event_code == LV_EVENT_CLICKED && THIS->activeSettings == eNone && THIS->db.config.has_lora) {
         lv_dropdown_set_selected(objects.settings_region_dropdown, THIS->db.config.lora.region - 1);
-        lv_obj_clear_flag(objects.settings_region_panel, LV_OBJ_FLAG_HIDDEN);
+      //   lv_obj_clear_flag(objects.settings_region_panel, LV_OBJ_FLAG_HIDDEN);
         lv_group_focus_obj(objects.settings_region_dropdown);
         THIS->disablePanel(objects.controller_panel);
         THIS->disablePanel(objects.tab_page_basic_settings);
@@ -5464,7 +5464,7 @@ bool TFTView_320x240::applyNodesFilter(uint32_t nodeNum, bool reset)
             }
         }
         {
-    const char *longName = lv_label_get_text(panel->LV_OBJ_IDX(node_lbs_idx));
+    const char *longName = lv_label_get_text(panel->LV_OBJ_IDX(node_lbl_idx));
     const char *prefix   = "GroupAlarm";
     size_t plen = strlen(prefix);
 
