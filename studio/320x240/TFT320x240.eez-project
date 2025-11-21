@@ -5800,7 +5800,7 @@
               ],
               "widgetFlags": "",
               "hiddenFlag": true,
-              "hiddenFlagType": "literal",
+              "hiddenFlagType": "expression",
               "clickableFlag": false,
               "clickableFlagType": "literal",
               "flagScrollbarMode": "off",
@@ -22527,7 +22527,7 @@
             }
           ],
           "widgetFlags": "PRESS_LOCK|CLICK_FOCUSABLE|GESTURE_BUBBLE|SNAPPABLE|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER",
-          "hiddenFlag": false,
+          "hiddenFlag": true,
           "hiddenFlagType": "literal",
           "clickableFlag": true,
           "clickableFlagType": "literal",
