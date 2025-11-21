@@ -3730,6 +3730,7 @@ void TFTView_320x240::updateSignalStrength(int32_t rssi, float snr)
         sprintf(buf, "SNR: %.1f\nRSSI: %" PRId32, snr, rssi);
         lv_label_set_text(objects.home_signal_label, buf);
         lv_obj_add_flag(objects.home_signal_label, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(objects.home_signal_button, LV_OBJ_FLAG_HIDDEN);
         uint32_t pct = signalStrength2Percent(rssi, snr);
         sprintf(buf, "(%d%%)", pct);
         lv_label_set_text(objects.home_signal_pct_label, buf);
