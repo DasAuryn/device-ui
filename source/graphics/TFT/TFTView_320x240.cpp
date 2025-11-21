@@ -633,7 +633,8 @@ void TFTView_320x240::apply_hotfix(void)
     {
         lv_obj_set_style_text_font(objects.home_qr_label, &ui_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
     }
-
+    lv_obj_add_flag(objects.home_qr_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.home_qr_button, LV_OBJ_FLAG_HIDDEN);
     lv_obj_move_foreground(objects.keyboard);
     lv_obj_add_flag(objects.detector_radar_panel, LV_OBJ_FLAG_HIDDEN);
     lv_obj_add_flag(objects.detected_node_button, LV_OBJ_FLAG_HIDDEN);
@@ -7042,6 +7043,8 @@ void TFTView_320x240::updateSecurityConfig(const meshtastic_Config_SecurityConfi
     // display public key in qr code label
     char buf[64];
     lv_snprintf(buf, sizeof(buf), "%s", pskToBase64((uint8_t *)cfg.public_key.bytes, cfg.public_key.size).c_str());
+    lv_obj_add_flag(objects.home_qr_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.home_qr_button, LV_OBJ_FLAG_HIDDEN);
     lv_label_set_text(objects.home_qr_label, buf);
 }
 
