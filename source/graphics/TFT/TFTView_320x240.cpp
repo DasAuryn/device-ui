@@ -7059,7 +7059,8 @@ void TFTView_320x240::updateMQTTModule(const meshtastic_ModuleConfig_MQTTConfig 
 {
     db.module_config.mqtt = cfg;
     db.module_config.has_mqtt = true;
-
+    lv_obj_add_flag(objects.home_mqtt_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.home_mqtt_label, LV_OBJ_FLAG_HIDDEN);
     char buf[32];
     lv_snprintf(buf, sizeof(buf), "%s", db.module_config.mqtt.root);
     lv_label_set_text(objects.home_mqtt_label, buf);
