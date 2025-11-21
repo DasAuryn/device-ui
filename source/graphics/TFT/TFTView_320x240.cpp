@@ -460,7 +460,8 @@ void TFTView_320x240::init_screens(void)
     objects.home_time_button->user_data = (void *)0;
     objects.home_wlan_button->user_data = (void *)0;
     objects.home_memory_button->user_data = (void *)0;
-
+    lv_obj_add_flag(objects.home_memory_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.home_memory_label, LV_OBJ_FLAG_HIDDEN);
     updateFreeMem();
 
     screensInitialised = true;
