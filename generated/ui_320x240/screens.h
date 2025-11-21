@@ -67,7 +67,7 @@ void create_tabview_settings(void);
 
 typedef struct _objects_t {
     lv_obj_t *boot_screen;
-    lv_obj_t *loop_screen;
+    lv_obj_t *main_screen;
     lv_obj_t *boot_logo_arc;
     lv_obj_t *boot_logo_button;
     lv_obj_t *meshtastic_url;
@@ -92,14 +92,14 @@ extern objects_t objects;
 
 enum ScreensEnum {
     SCREEN_ID_BOOT_SCREEN = 1,
-    SCREEN_ID_LOOP_SCREEN = 2,
+    SCREEN_ID_MAIN_SCREEN = 2,
 };
 
 void create_screen_boot_screen();
 void tick_screen_boot_screen();
 
-void create_screen_loop_screen();
-void tick_screen_loop_screen();
+void create_screen_main_screen();
+void tick_screen_main_screen();
 
 void create_user_widget_ok_cancel_widget(lv_obj_t *parent_obj, int startWidgetIndex);
 void tick_user_widget_ok_cancel_widget(int startWidgetIndex);

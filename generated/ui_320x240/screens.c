@@ -261,16 +261,16 @@ void tick_screen_boot_screen() {
     tick_user_widget_ok_cancel_widget(17);
 }
 
-void create_screen_loop_screen() {
+void create_screen_main_screen() {
     lv_obj_t *obj = lv_obj_create(0);
-    objects.loop_screen = obj;
+    objects.main_screen = obj;
     lv_obj_set_pos(obj, 0, 0);
     lv_obj_set_size(obj, 320, 240);
     
-    tick_screen_loop_screen();
+    tick_screen_main_screen();
 }
 
-void tick_screen_loop_screen() {
+void tick_screen_main_screen() {
 }
 
 void create_user_widget_ok_cancel_widget(lv_obj_t *parent_obj, int startWidgetIndex) {
@@ -357,7 +357,7 @@ void tick_user_widget_ok_cancel_widget(int startWidgetIndex) {
 typedef void (*tick_screen_func_t)();
 tick_screen_func_t tick_screen_funcs[] = {
     tick_screen_boot_screen,
-    tick_screen_loop_screen,
+    tick_screen_main_screen,
 };
 void tick_screen(int screen_index) {
     tick_screen_funcs[screen_index]();
@@ -372,5 +372,5 @@ void create_screens() {
     lv_disp_set_theme(dispp, theme);
     
     create_screen_boot_screen();
-    create_screen_loop_screen();
+    create_screen_main_screen();
 }
