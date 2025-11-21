@@ -8,7 +8,7 @@
   "files.trimFinalNewlines": false,
   "cmake.configureOnOpen": false,
   "[cpp]": {
-    "editor.defaultFormatter": "trunk.io"
+    "editor.defaultFormatter": "ms-vscode.cpptools"
   },
   "testMate.cpp.test.executables": "${workspaceFolder}/build/bin/tests",
   "testMate.cpp.discovery.loadOnStartup": true,
