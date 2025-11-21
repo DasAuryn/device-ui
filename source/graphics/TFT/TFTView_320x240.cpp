@@ -5463,6 +5463,17 @@ bool TFTView_320x240::applyNodesFilter(uint32_t nodeNum, bool reset)
                 hide = true;
             }
         }
+        {
+    const char *longName = lv_label_get_text(panel->LV_OBJ_IDX(node_lbs_idx));
+    const char *prefix   = "GroupAlarm";
+    size_t plen = strlen(prefix);
+
+    // wenn LongName leer oder Prefix passt nicht => verstecken
+    if (!longName || longName[0] == '\0' ||
+        strncasecmp(longName, prefix, plen) != 0) {
+        hide = true;
+    }
+}
         if (lv_obj_has_state(objects.nodes_filter_offline_switch, LV_STATE_CHECKED)) {
             time_t lastHeard = (time_t)panel->LV_OBJ_IDX(node_lh_idx)->user_data;
             if (lastHeard == 0 || curtime - lastHeard > secs_until_offline)
