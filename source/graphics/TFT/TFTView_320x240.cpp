@@ -1653,7 +1653,8 @@ void TFTView_320x240::ui_event_MQTTButton(lv_event_t *e)
         // toggle MQTT on/off
         uint32_t toggle = (unsigned long)objects.home_mqtt_button->user_data;
         objects.home_mqtt_button->user_data = (void *)(1 - toggle);
-
+        lv_obj_add_flag(objects.home_mqtt_button, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(objects.home_mqtt_label, LV_OBJ_FLAG_HIDDEN);
         meshtastic_ModuleConfig_MQTTConfig &mqtt = THIS->db.module_config.mqtt;
         mqtt.enabled = !mqtt.enabled;
         Themes::recolorButton(objects.home_mqtt_button, mqtt.enabled);
@@ -1690,6 +1691,9 @@ void TFTView_320x240::ui_event_MemoryButton(lv_event_t *e)
     lv_event_code_t event_code = lv_event_get_code(e);
     if (event_code == LV_EVENT_CLICKED)
     {
+        lv_obj_set_add(objects.home_memory_button, LV_STATE_HIDDEN);
+        lv_obj_set_add(objects.home_memory_label, LV_STATE_HIDDEN);
+
         // toggle memory display updates
         uint32_t toggle = (unsigned long)objects.home_memory_button->user_data;
         objects.home_memory_button->user_data = (void *)(1 - toggle);
@@ -8242,7 +8246,8 @@ void TFTView_320x240::updateFreeMem(void)
         char buf[64];
         uint32_t freeHeap = 0;
         uint32_t freeHeap_pct = 0;
-
+        lv_obj_set_add(objects.home_memory_button, LV_STATE_HIDDEN);
+        lv_obj_set_add(objects.home_memory_label, LV_STATE_HIDDEN);
         lv_mem_monitor_t mon;
         lv_mem_monitor(&mon);
 
