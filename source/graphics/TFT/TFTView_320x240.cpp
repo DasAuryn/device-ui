@@ -6782,7 +6782,8 @@ void TFTView_320x240::showLoRaFrequency(const meshtastic_Config_LoRaConfig &cfg)
         sprintf(loraFreq, "LoRa %g MHz\n[%d kHz]", frequency, cfg.bandwidth);
         lv_obj_add_state(objects.basic_settings_modem_preset_button, LV_STATE_DISABLED);
     }
-    lv_obj_add_flag(objects.top_lora_tx_panel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.home_lora_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.home_lora_label, LV_OBJ_FLAG_HIDDEN);
 
     lv_label_set_text(objects.home_lora_label, loraFreq);
     Themes::recolorButton(objects.home_lora_button, cfg.tx_enabled);
