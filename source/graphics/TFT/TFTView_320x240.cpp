@@ -28,6 +28,9 @@
 #include <random>
 #include <sstream>
 #include <time.h>
+#ifdef ARDUINO_ARCH_ESP32
+#include <WiFi.h>
+#endif
 
 #if defined(ARCH_PORTDUINO)
 #include "PortduinoFS.h"
@@ -80,6 +83,18 @@ constexpr lv_color_t colorLightGray = LV_COLOR_HEX(0xAAFBFF);
 constexpr lv_color_t colorMidGray = LV_COLOR_HEX(0x808080);
 constexpr lv_color_t colorDarkGray = LV_COLOR_HEX(0x303030);
 constexpr lv_color_t colorMesh = LV_COLOR_HEX(0x2962ff);
+#ifdef ARDUINO_ARCH_ESP32
+static lv_obj_t *wifi_scan_list = nullptr;
+static lv_obj_t *wifi_scan_btn = nullptr;
+static lv_obj_t *wifi_ssid_ta = nullptr;
+static lv_obj_t *wifi_psk_ta = nullptr;
+static bool wifi_scan_in_progress = false;
+
+// Forward decl
+static void start_wifi_scan(lv_obj_t *parent);
+static void wifi_scan_btn_cb(lv_event_t *e);
+static void wifi_ssid_selected_cb(lv_event_t *e);
+#endif
 
 // children index of nodepanel lv objects (see addNode)
 enum NodePanelIdx
@@ -1629,6 +1644,12 @@ void TFTView_320x240::ui_event_WLANButton(lv_event_t *e)
             lv_textarea_set_text(objects.settings_wifi_password_textarea, THIS->db.config.network.wifi_psk);
             lv_obj_clear_flag(objects.settings_wifi_panel, LV_OBJ_FLAG_HIDDEN);
             lv_group_focus_obj(objects.settings_wifi_ssid_textarea);
+#ifdef ARDUINO_ARCH_ESP32
+            wifi_ssid_ta = objects.settings_wifi_ssid_textarea;
+            wifi_psk_ta = objects.settings_wifi_password_textarea;
+            start_wifi_scan(objects.settings_wifi_panel);
+#endif
+
             THIS->disablePanel(objects.home_panel);
             lv_obj_clear_state(objects.home_wlan_button, LV_STATE_PRESSED);
             THIS->activeSettings = eWifi;
@@ -8313,6 +8334,72 @@ void TFTView_320x240::updateFreeMem(void)
         lv_label_set_text(objects.home_memory_label, buf);
     }
 }
+#ifdef ARDUINO_ARCH_ESP32
+
+static void ensure_wifi_scan_ui(lv_obj_t *parent)
+{
+    if (!wifi_scan_list)
+    {
+        wifi_scan_list = lv_list_create(parent);
+        lv_obj_set_size(wifi_scan_list, LV_PCT(90), LV_PCT(70));
+        lv_obj_align(wifi_scan_list, LV_ALIGN_CENTER, 0, 0);
+        lv_obj_add_flag(wifi_scan_list, LV_OBJ_FLAG_HIDDEN);
+    }
+
+    if (!wifi_scan_btn)
+    {
+        wifi_scan_btn = lv_btn_create(parent);
+        lv_obj_set_size(wifi_scan_btn, 60, 24);
+        lv_obj_align(wifi_scan_btn, LV_ALIGN_TOP_RIGHT, -6, 6);
+
+        lv_obj_t *lbl = lv_label_create(wifi_scan_btn);
+        lv_label_set_text(lbl, _("Scan"));
+        lv_obj_center(lbl);
+
+        lv_obj_add_event_cb(wifi_scan_btn, wifi_scan_btn_cb, LV_EVENT_CLICKED, parent);
+    }
+}
+
+static void start_wifi_scan(lv_obj_t *parent)
+{
+    ensure_wifi_scan_ui(parent);
+
+    lv_list_clean(wifi_scan_list);
+    lv_list_add_text(wifi_scan_list, _("Scanning..."));
+    lv_obj_clear_flag(wifi_scan_list, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_move_foreground(wifi_scan_list);
+
+    wifi_scan_in_progress = true;
+
+    WiFi.scanDelete();
+    WiFi.scanNetworks(true); // async scan
+}
+
+static void wifi_scan_btn_cb(lv_event_t *e)
+{
+    lv_obj_t *parent = (lv_obj_t *)lv_event_get_user_data(e);
+    if (!parent)
+        parent = lv_obj_get_parent(lv_event_get_target(e));
+    start_wifi_scan(parent);
+}
+
+static void wifi_ssid_selected_cb(lv_event_t *e)
+{
+    lv_obj_t *btn = lv_event_get_target(e);
+    const char *ssid = lv_list_get_btn_text(wifi_scan_list, btn);
+
+    if (ssid && wifi_ssid_ta)
+    {
+        lv_textarea_set_text(wifi_ssid_ta, ssid);
+        if (wifi_psk_ta)
+            lv_group_focus_obj(wifi_psk_ta);
+    }
+
+    if (wifi_scan_list)
+        lv_obj_add_flag(wifi_scan_list, LV_OBJ_FLAG_HIDDEN);
+}
+
+#endif
 
 void TFTView_320x240::task_handler(void)
 {
@@ -8329,7 +8416,50 @@ void TFTView_320x240::task_handler(void)
             {
                 updateLocationMap(THIS->map->getObjectsOnMap());
             }
+#ifdef ARDUINO_ARCH_ESP32
+            if (wifi_scan_in_progress)
+            {
+                int n = WiFi.scanComplete();
+                if (n >= 0)
+                {
+                    wifi_scan_in_progress = false;
 
+                    if (wifi_scan_list)
+                    {
+                        lv_list_clean(wifi_scan_list);
+
+                        if (n == 0)
+                        {
+                            lv_list_add_text(wifi_scan_list, _("No networks found"));
+                        }
+                        else
+                        {
+                            for (int i = 0; i < n; i++)
+                            {
+                                String s = WiFi.SSID(i);
+                                lv_obj_t *b = lv_list_add_btn(wifi_scan_list, NULL, s.c_str());
+                                lv_obj_add_event_cb(b, wifi_ssid_selected_cb, LV_EVENT_CLICKED, NULL);
+                            }
+                        }
+
+                        lv_obj_clear_flag(wifi_scan_list, LV_OBJ_FLAG_HIDDEN);
+                        lv_obj_move_foreground(wifi_scan_list);
+                    }
+
+                    WiFi.scanDelete();
+                }
+                else if (n == WIFI_SCAN_FAILED)
+                {
+                    wifi_scan_in_progress = false;
+                    if (wifi_scan_list)
+                    {
+                        lv_list_clean(wifi_scan_list);
+                        lv_list_add_text(wifi_scan_list, _("Scan failed"));
+                    }
+                    WiFi.scanDelete();
+                }
+            }
+#endif
             lastrun1 = curtime;
             actTime++;
             updateTime();
