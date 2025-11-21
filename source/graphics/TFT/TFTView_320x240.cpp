@@ -8364,7 +8364,7 @@ static void start_wifi_scan(lv_obj_t *parent)
 {
     ensure_wifi_scan_ui(parent);
 
-    lv_list_clean(wifi_scan_list);
+    lv_obj_clean(wifi_scan_list);
     lv_list_add_text(wifi_scan_list, _("Scanning..."));
     lv_obj_clear_flag(wifi_scan_list, LV_OBJ_FLAG_HIDDEN);
     lv_obj_move_foreground(wifi_scan_list);
@@ -8379,13 +8379,13 @@ static void wifi_scan_btn_cb(lv_event_t *e)
 {
     lv_obj_t *parent = (lv_obj_t *)lv_event_get_user_data(e);
     if (!parent)
-        parent = lv_obj_get_parent(lv_event_get_target(e));
+        parent = lv_obj_get_parent((lv_obj_t *)lv_event_get_target(e));
     start_wifi_scan(parent);
 }
 
 static void wifi_ssid_selected_cb(lv_event_t *e)
 {
-    lv_obj_t *btn = lv_event_get_target(e);
+    lv_obj_t *btn = (lv_obj_t *)lv_event_get_target(e);
     const char *ssid = lv_list_get_btn_text(wifi_scan_list, btn);
 
     if (ssid && wifi_ssid_ta)
@@ -8426,7 +8426,7 @@ void TFTView_320x240::task_handler(void)
 
                     if (wifi_scan_list)
                     {
-                        lv_list_clean(wifi_scan_list);
+                        lv_obj_clean(wifi_scan_list);
 
                         if (n == 0)
                         {
@@ -8453,7 +8453,7 @@ void TFTView_320x240::task_handler(void)
                     wifi_scan_in_progress = false;
                     if (wifi_scan_list)
                     {
-                        lv_list_clean(wifi_scan_list);
+                        lv_obj_clean(wifi_scan_list);
                         lv_list_add_text(wifi_scan_list, _("Scan failed"));
                     }
                     WiFi.scanDelete();
