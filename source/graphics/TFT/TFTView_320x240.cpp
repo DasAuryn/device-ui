@@ -5671,6 +5671,8 @@ void TFTView_320x240::updateConnectionStatus(const meshtastic_DeviceConnectionSt
                 lv_label_set_text(objects.home_wlan_label, buf);
                 Themes::recolorButton(objects.home_wlan_button, true);
                 Themes::recolorText(objects.home_wlan_label, true);
+                lv_obj_add_flag(objects.home_wlan_button, LV_OBJ_FLAG_HIDDEN);
+                lv_obj_add_flag(objects.home_wlan_label, LV_OBJ_FLAG_HIDDEN;
                 if (status.wifi.status.is_connected)
                 {
                     lv_obj_set_style_bg_img_src(objects.home_wlan_button, &img_home_wlan_button_image,
