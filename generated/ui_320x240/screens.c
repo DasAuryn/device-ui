@@ -454,15 +454,7 @@ void create_screen_main_screen() {
                             lv_obj_set_style_bg_image_recolor(obj, lv_color_hex(0xff9b9bff), LV_PART_MAIN | LV_STATE_PRESSED);
                             lv_obj_set_style_bg_color(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_PRESSED);
                         }
-                        {
-                            // HomeNodesLabel
-                            lv_obj_t *obj = lv_label_create(parent_obj);
-                            objects.home_nodes_label = obj;
-                            lv_obj_set_pos(obj, 105, 50);
-                            lv_obj_set_size(obj, LV_PCT(80), LV_SIZE_CONTENT);
-                            lv_label_set_long_mode(obj, LV_LABEL_LONG_CLIP);
-                            lv_label_set_text(obj, _("1 of 1 nodes online"));
-                        }
+               
                         {
                             // HomeTimeButton
                             lv_obj_t *obj = lv_button_create(parent_obj);
