@@ -678,6 +678,7 @@ void TFTView_320x240::apply_hotfix(void)
     tab_buttons = lv_tabview_get_tab_bar(objects.controller_tab_view);
     applyStyle(tab_buttons);
     lv_btnmatrix_set_btn_ctrl(tab_buttons, 1, LV_BTNMATRIX_CTRL_HIDDEN);
+    lv_obj_add_flag(tab_buttons, LV_OBJ_FLAG_HIDDEN);
 
     tab_buttons = lv_tabview_get_tab_bar(ui_SettingsTabView);
     applyStyle(tab_buttons);
