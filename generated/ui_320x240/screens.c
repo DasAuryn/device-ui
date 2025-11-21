@@ -2188,6 +2188,7 @@ void create_screen_main_screen()
                             lv_obj_set_style_pad_row(obj, 2, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_column(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 2, LV_PART_MAIN | LV_STATE_DEFAULT);
+                            lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
                             {
                                 lv_obj_t *parent_obj = obj;
                                 {
