@@ -8353,23 +8353,27 @@ static void ensure_wifi_scan_ui(lv_obj_t *parent)
 
     if (!wifi_scan_btn)
     {
-        wifi_scan_btn = lv_btn_create(parent);
-        lv_obj_set_size(wifi_scan_btn, 60, 24);
+        wifi_scan_btn = lv_btn_create(objects.obj8);
+        lv_obj_set_size(wifi_scan_btn, 55, 30);
 
-        if (objects.obj8)
-        {
-            lv_obj_align_to(wifi_scan_btn, objects.obj8, LV_ALIGN_OUT_LEFT_MID, -6, 0);
-        }
-        else
-        {
-            lv_obj_align(wifi_scan_btn, LV_ALIGN_BOTTOM_LEFT, 6, -6);
-        }
+        lv_obj_align_to(
+            wifi_scan_btn,
+            objects.obj8__ok_button_w,
+            LV_ALIGN_OUT_LEFT_MID,
+            -6,
+            0);
+
+        lv_obj_add_style(wifi_scan_btn, &style_btn_default, LV_STATE_DEFAULT);
 
         lv_obj_t *lbl = lv_label_create(wifi_scan_btn);
         lv_label_set_text(lbl, _("Scan"));
         lv_obj_center(lbl);
 
-        lv_obj_add_event_cb(wifi_scan_btn, wifi_scan_btn_cb, LV_EVENT_CLICKED, parent);
+        lv_obj_add_event_cb(
+            wifi_scan_btn,
+            start_wifi_scan,
+            LV_EVENT_CLICKED,
+            objects.settings_wifi_panel);
     }
 }
 
