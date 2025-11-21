@@ -5976,7 +5976,7 @@ void TFTView_320x240::showLoRaFrequency(const meshtastic_Config_LoRaConfig &cfg)
     Themes::recolorButton(objects.home_lora_button, cfg.tx_enabled);
     Themes::recolorText(objects.home_lora_label, cfg.tx_enabled);
     if (!cfg.tx_enabled) {
-        lv_obj_clear_flag(objects.top_lora_tx_panel, LV_OBJ_FLAG_HIDDEN);
+       // lv_obj_clear_flag(objects.top_lora_tx_panel, LV_OBJ_FLAG_HIDDEN);
     } else {
         lv_obj_add_flag(objects.top_lora_tx_panel, LV_OBJ_FLAG_HIDDEN);
     }
