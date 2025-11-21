@@ -965,7 +965,7 @@
               "MAIN": {
                 "DEFAULT": {
                   "text_font": "montserrat_14",
-                  "bg_color": "#3e2fff"
+                  "bg_color": "2962FF"
                 }
               }
             }
@@ -8508,61 +8508,6 @@
               "heightUnit": "%",
               "children": [
                 {
-                  "objID": "ffc4dbb0-0d1d-42d3-c337-b519a37deba2",
-                  "type": "LVGLImageWidget",
-                  "left": -60,
-                  "top": 0,
-                  "width": 36,
-                  "height": 17,
-                  "customInputs": [],
-                  "customOutputs": [],
-                  "style": {
-                    "objID": "bf8a371b-0512-4ca2-a3c1-0b2ffd0b4c91",
-                    "useStyle": "default",
-                    "conditionalStyles": [],
-                    "childStyles": []
-                  },
-                  "hiddenInEditor": false,
-                  "timeline": [],
-                  "eventHandlers": [],
-                  "identifier": "MeshtasticImage",
-                  "leftUnit": "px",
-                  "topUnit": "px",
-                  "widthUnit": "px",
-                  "heightUnit": "px",
-                  "children": [],
-                  "widgetFlags": "ADV_HITTEST|CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
-                  "hiddenFlagType": "literal",
-                  "clickableFlagType": "literal",
-                  "checkedStateType": "literal",
-                  "disabledStateType": "literal",
-                  "states": "",
-                  "useStyle": "TopImageStyle",
-                  "localStyles": {
-                    "objID": "d801a86a-f5df-4209-9a0e-9cee3f57e188",
-                    "definition": {
-                      "MAIN": {
-                        "DEFAULT": {
-                          "align": "CENTER"
-                        },
-                        "DISABLED": {
-                          "img_opa": 255,
-                          "img_recolor": "#ffffff",
-                          "img_recolor_opa": 255
-                        }
-                      }
-                    }
-                  },
-                  "groupIndex": 0,
-                  "image": "meshtastic_logo_image",
-                  "setPivot": true,
-                  "pivotX": 0,
-                  "pivotY": 0,
-                  "zoom": 256,
-                  "angle": 0,
-                  "innerAlign": "CENTER"
-                },
-                {
                   "objID": "579b2ba5-ec21-4a92-9af6-2989833a4300",
                   "type": "LVGLLabelWidget",
                   "left": 14,
@@ -8597,14 +8542,14 @@
                     "definition": {
                       "MAIN": {
                         "DEFAULT": {
-                          "text_font": "montserrat_20",
+                          "text_font": "montserrat_12",
                           "align": "CENTER"
                         }
                       }
                     }
                   },
                   "groupIndex": 0,
-                  "text": "Meshtastic",
+                  "text": "GroupAlarm",
                   "textType": "translated-literal",
                   "longMode": "WRAP",
                   "recolor": false
