@@ -4767,6 +4767,8 @@ void TFTView_320x240::ui_event_cancel(lv_event_t *e)
         case TFTView_320x240::eLanguage:
         {
             lv_obj_add_flag(objects.settings_language_panel, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_add_flag(objects.basic_settings_language_button, LV_OBJ_FLAG_HIDDEN);
+
             lv_group_focus_obj(objects.basic_settings_language_button);
             break;
         }
