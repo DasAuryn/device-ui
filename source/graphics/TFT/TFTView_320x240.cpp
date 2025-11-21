@@ -7948,48 +7948,53 @@ void TFTView_320x240::setNodeImage(uint32_t nodeNum, eRole role, bool unmessagab
     lv_obj_set_style_border_color(img, lv_color_hex(bgColor), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_img_recolor_opa(img, fgColor ? 0 : 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 }
-
 void TFTView_320x240::updateNodesStatus(void)
 {
+    auto isGroupAlarm = [&](lv_obj_t *panel, uint32_t nodeNum) -> bool
+    {
+        if (nodeNum == ownNode)
+            return true; // eigenes Gerät immer mit zählen
+        const char *longName = lv_label_get_text(panel->LV_OBJ_IDX(node_lbl_idx));
+        const char *prefix = "GroupAlarm";
+        size_t plen = strlen(prefix);
+        return (longName && longName[0] != '\0' && strncasecmp(longName, prefix, plen) == 0);
+    };
+
+    uint16_t gaTotal = 0;
+    uint16_t gaOnline = 0;
+
+    for (auto &it : nodes)
+    {
+        uint32_t nodeNum = it.first;
+        lv_obj_t *panel = it.second;
+        if (!panel)
+            continue;
+
+        if (isGroupAlarm(panel, nodeNum))
+        {
+            gaTotal++;
+
+            // online-Definition wie im Rest vom Code:
+            time_t lastHeard = (time_t)panel->LV_OBJ_IDX(node_lh_idx)->user_data;
+
+            if (nodeNum == ownNode)
+            {
+                gaOnline++; // eigenes Gerät immer online
+            }
+            else if (lastHeard > 0 && (curtime - lastHeard <= secs_until_offline))
+            {
+                gaOnline++;
+            }
+        }
+    }
+
     char buf[40];
-    lv_snprintf(buf, sizeof(buf), _p("%d of %d nodes online", nodeCount), nodesOnline, nodeCount);
+    lv_snprintf(buf, sizeof(buf), _p("%d of %d nodes online", gaTotal), gaOnline, gaTotal);
     lv_label_set_text(objects.home_nodes_label, buf);
 
-    if (nodesFiltered)
-        lv_snprintf(buf, sizeof(buf), _("Filter: %d of %d nodes"), nodeCount - nodesFiltered, nodeCount);
+    // Oben rechts nicht mehr "Filter …", sondern GA-Info
+    lv_snprintf(buf, sizeof(buf), _("GroupAlarm: %d/%d online"), gaOnline, gaTotal);
     lv_label_set_text(objects.top_nodes_online_label, buf);
-}
-
-/**
- * @brief Dynamically update all nodes filter and highlight
- *        Because the update can take quite some time (tens of ms) it is done in smaller
- *        chunks of 10 nodes per invocation, so it must be periodically called
- *        TODO: check for side effects if new nodes are inserted or removed during filter processing
- * @param reset indicates to start update from beginning of node list otherwise
- *        continue with iterator position or skip if done
- */
-void TFTView_320x240::updateNodesFiltered(bool reset)
-{
-    static auto it = nodes.begin();
-    if (reset || nodesChanged)
-    {
-        nodesFiltered = 0;
-        nodesChanged = false;
-        processingFilter = true;
-        it = nodes.begin();
-    }
-
-    for (int i = 0; i < 10 && it != nodes.end(); i++)
-    {
-        applyNodesFilter(it->first, true);
-        it++;
-    }
-
-    if (it == nodes.end())
-    {
-        processingFilter = false;
-    }
-    updateNodesStatus();
 }
 
 /**
