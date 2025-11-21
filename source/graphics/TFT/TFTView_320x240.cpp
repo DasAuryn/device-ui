@@ -7948,6 +7948,7 @@ void TFTView_320x240::setNodeImage(uint32_t nodeNum, eRole role, bool unmessagab
     lv_obj_set_style_border_color(img, lv_color_hex(bgColor), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_img_recolor_opa(img, fgColor ? 0 : 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 }
+
 void TFTView_320x240::updateNodesStatus(void)
 {
     auto isGroupAlarm = [&](lv_obj_t *panel, uint32_t nodeNum) -> bool
@@ -7995,6 +7996,38 @@ void TFTView_320x240::updateNodesStatus(void)
     // Oben rechts nicht mehr "Filter …", sondern GA-Info
     lv_snprintf(buf, sizeof(buf), _("GroupAlarm: %d/%d online"), gaOnline, gaTotal);
     lv_label_set_text(objects.top_nodes_online_label, buf);
+}
+
+/**
+ * @brief Dynamically update all nodes filter and highlight
+ *        Because the update can take quite some time (tens of ms) it is done in smaller
+ *        chunks of 10 nodes per invocation, so it must be periodically called
+ *        TODO: check for side effects if new nodes are inserted or removed during filter processing
+ * @param reset indicates to start update from beginning of node list otherwise
+ *        continue with iterator position or skip if done
+ */
+void TFTView_320x240::updateNodesFiltered(bool reset)
+{
+    static auto it = nodes.begin();
+    if (reset || nodesChanged)
+    {
+        nodesFiltered = 0;
+        nodesChanged = false;
+        processingFilter = true;
+        it = nodes.begin();
+    }
+
+    for (int i = 0; i < 10 && it != nodes.end(); i++)
+    {
+        applyNodesFilter(it->first, true);
+        it++;
+    }
+
+    if (it == nodes.end())
+    {
+        processingFilter = false;
+    }
+    updateNodesStatus();
 }
 
 /**
