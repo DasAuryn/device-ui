@@ -3964,7 +3964,7 @@ meshtastic_Language TFTView_320x240::val2language(uint32_t val)
  */
 void TFTView_320x240::setLocale(meshtastic_Language lang)
 {
-    const char *locale = "en_US.UTF-8";
+    const char *locale = "de_DE.UTF-8";
     switch (lang)
     {
     case meshtastic_Language_GERMAN:
