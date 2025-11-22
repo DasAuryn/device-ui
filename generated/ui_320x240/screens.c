@@ -3985,7 +3985,7 @@ void create_screen_main_screen()
             objects.settings_screen_lock_panel = obj;
             lv_obj_set_pos(obj, LV_PCT(5), LV_PCT(12));
             lv_obj_set_size(obj, 228, 178);
-            // lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
             lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
             add_style_settings_panel_style(obj);
             lv_obj_set_style_border_width(obj, 2, LV_PART_MAIN | LV_STATE_DEFAULT);
