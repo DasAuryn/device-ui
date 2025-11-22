@@ -221,6 +221,7 @@ bool TFTView_320x240::setupUIConfig(const meshtastic_DeviceUIConfig &uiconfig)
     {
         ILOG_INFO("setupUIConfig version %d", uiconfig.version);
         db.uiConfig = uiconfig;
+        db.uiConfig.language = meshtastic_Language_GERMAN;
         if (db.uiConfig.screen_timeout == 1)
         {
             db.uiConfig.screen_timeout = 30;
