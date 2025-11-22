@@ -3852,11 +3852,11 @@ uint32_t TFTView_320x240::language2val(meshtastic_Language lang)
 {
     switch (lang)
     {
-    case meshtastic_Language_ENGLISH:
+    case meshtastic_Language_GERMAN:
         return 0;
     case meshtastic_Language_FRENCH:
         return 7;
-    case meshtastic_Language_GERMAN:
+    case meshtastic_Language_ENGLISH:
         return 4;
     case meshtastic_Language_ITALIAN:
         return 8;
@@ -3910,11 +3910,11 @@ meshtastic_Language TFTView_320x240::val2language(uint32_t val)
     switch (val)
     {
     case 0:
-        return meshtastic_Language_ENGLISH;
+        return meshtastic_Language_GERMAN;
     case 7:
         return meshtastic_Language_FRENCH;
     case 4:
-        return meshtastic_Language_GERMAN;
+        return meshtastic_Language_ENGLISH;
     case 8:
         return meshtastic_Language_ITALIAN;
     case 12:
@@ -3956,7 +3956,7 @@ meshtastic_Language TFTView_320x240::val2language(uint32_t val)
     default:
         ILOG_WARN("unknown language val: %d", val);
     }
-    return meshtastic_Language_ENGLISH;
+    return meshtastic_Language_GERMAN;
 }
 
 /**
@@ -3967,6 +3967,10 @@ void TFTView_320x240::setLocale(meshtastic_Language lang)
     const char *locale = "en_US.UTF-8";
     switch (lang)
     {
+    case meshtastic_Language_GERMAN:
+        lv_i18n_set_locale("de");
+        locale = "de_DE.UTF-8";
+        break;
     case meshtastic_Language_ENGLISH:
         lv_i18n_set_locale("en");
         break;
@@ -3974,10 +3978,7 @@ void TFTView_320x240::setLocale(meshtastic_Language lang)
         lv_i18n_set_locale("bg");
         locale = "bg_BG.UTF-8";
         break;
-    case meshtastic_Language_GERMAN:
-        lv_i18n_set_locale("de");
-        locale = "de_DE.UTF-8";
-        break;
+
     case meshtastic_Language_SPANISH:
         lv_i18n_set_locale("es");
         locale = "es_ES.UTF-8";
