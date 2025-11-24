@@ -6716,7 +6716,17 @@ void TFTView_320x240::updateDeviceConfig(const meshtastic_Config_DeviceConfig &c
 {
     db.config.device = cfg;
     db.config.has_device = true;
-
+    if (cfg.tzdef[0] != '\0')
+    {
+        setenv("TZ", cfg.tzdef, 1);
+        tzset();
+    }
+    else
+    {
+        // optionaler Default für DE, falls leer:
+        setenv("TZ", "CET-1CEST,M3.5.0,M10.5.0/3", 1);
+        tzset();
+    }
     char buf1[30], buf2[40];
     lv_dropdown_set_selected(objects.settings_device_role_dropdown, role2val(cfg.role));
     lv_dropdown_get_selected_str(objects.settings_device_role_dropdown, buf1, sizeof(buf1));
