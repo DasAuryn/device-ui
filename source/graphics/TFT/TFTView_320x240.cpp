@@ -7173,12 +7173,13 @@ void TFTView_320x240::updateTime(uint32_t timeVal)
 {
     time_t localtime;
     time(&localtime);
+    ILOG_INFO("TZ env in updateTime(timeVal): %s", getenv("TZ"));
 
     if (VALID_TIME(localtime))
     {
         if (actTime != localtime)
         {
-            ILOG_DEBUG("update (local)time: %d -> %d", actTime, localtime);
+            ILOG_INFO("update (local)time: %d -> %d", actTime, localtime);
             actTime = localtime;
         }
     }
@@ -7186,7 +7187,7 @@ void TFTView_320x240::updateTime(uint32_t timeVal)
     {
         if (timeVal > actTime)
         {
-            ILOG_DEBUG("update (act)time: %d -> %d", actTime, timeVal);
+            ILOG_INFO("update (act)time: %d -> %d", actTime, timeVal);
             actTime = timeVal;
         }
     }
