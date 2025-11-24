@@ -18,6 +18,7 @@ public:
   void init(IClientBase *client) override;
   bool setupUIConfig(const meshtastic_DeviceUIConfig &uiconfig) override;
   void task_handler(void) override;
+  static void wakeForAlert();
 
   // methods to update view
   void setMyInfo(uint32_t nodeNum) override;

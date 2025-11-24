@@ -82,7 +82,7 @@ constexpr lv_color_t colorGray = LV_COLOR_HEX(0x757575);
 constexpr lv_color_t colorLightGray = LV_COLOR_HEX(0xAAFBFF);
 constexpr lv_color_t colorMidGray = LV_COLOR_HEX(0x808080);
 constexpr lv_color_t colorDarkGray = LV_COLOR_HEX(0x303030);
-constexpr lv_color_t colorMesh = LV_COLOR_HEX(0x2962ff);
+constexpr lv_color_t colorMesh = LV_COLOR_HEX(0x216ad8);
 #ifdef ARDUINO_ARCH_ESP32
 static lv_obj_t *wifi_scan_list = nullptr;
 static lv_obj_t *wifi_scan_btn = nullptr;
@@ -96,7 +96,6 @@ static void wifi_scan_btn_cb(lv_event_t *e);
 static void wifi_ssid_selected_cb(lv_event_t *e);
 #endif
 
-// children index of nodepanel lv objects (see addNode)
 enum NodePanelIdx
 {
     node_img_idx,
@@ -6601,6 +6600,23 @@ void TFTView_320x240::screenSaving(bool enabled)
 bool TFTView_320x240::isScreenLocked(void)
 {
     return screenLocked && !screenUnlockRequest;
+}
+void TFTView_320x240::wakeForAlert()
+{
+    if (!gui)
+        return;
+
+    // Entsperren/Touch erlauben
+    screenUnlockRequest = true;
+    screenLocked = false;
+
+    // Blank-Screen weg, zurück auf Main/Boot
+    gui->blankScreen(false);
+
+    // Activity-Flag setzen (damit PowerFSM "wach" sieht)
+    lv_disp_trig_activity(NULL);
+
+    ILOG_DEBUG("wakeForAlert(): screen unblanked for alert");
 }
 
 void TFTView_320x240::updateChannelConfig(const meshtastic_Channel &ch)
