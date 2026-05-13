@@ -226,6 +226,8 @@ bool TFTView_320x240::setupUIConfig(const meshtastic_DeviceUIConfig &uiconfig)
             db.uiConfig.screen_timeout = 30;
             controller->storeUIConfig(db.uiConfig);
         }
+        if (uiconfig.language != meshtastic_Language_GERMAN)
+            controller->storeUIConfig(db.uiConfig);
     }
     else
     {
@@ -233,6 +235,7 @@ bool TFTView_320x240::setupUIConfig(const meshtastic_DeviceUIConfig &uiconfig)
         db.uiConfig.version = 1;
         db.uiConfig.screen_brightness = 153;
         db.uiConfig.screen_timeout = 30;
+        db.uiConfig.language = meshtastic_Language_GERMAN;
         controller->storeUIConfig(db.uiConfig);
     }
 
@@ -402,6 +405,40 @@ void TFTView_320x240::init_screens(void)
     ui_set_active(objects.home_button, objects.home_panel, objects.top_panel);
     ui_events_init();
 
+    lv_obj_add_flag(objects.home_location_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.home_location_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.home_wlan_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.home_wlan_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.home_bell_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.home_bell_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.home_signal_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.home_signal_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.home_signal_pct_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_modem_preset_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_modem_preset_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_wifi_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_wifi_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_timeout_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_timeout_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_screen_lock_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_screen_lock_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_alert_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_alert_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_language_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_language_button, LV_OBJ_FLAG_IGNORE_LAYOUT);
+    lv_obj_add_flag(objects.basic_settings_language_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_language_label, LV_OBJ_FLAG_IGNORE_LAYOUT);
+    lv_obj_add_flag(objects.basic_settings_timezone_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_timezone_button, LV_OBJ_FLAG_IGNORE_LAYOUT);
+    lv_obj_add_flag(objects.basic_settings_timezone_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_timezone_label, LV_OBJ_FLAG_IGNORE_LAYOUT);
+    lv_obj_add_flag(objects.settings_modem_preset_panel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.settings_wifi_panel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.settings_screen_timeout_panel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.settings_screen_lock_panel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.settings_alert_buzzer_panel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.settings_language_panel, LV_OBJ_FLAG_HIDDEN);
+
     // load main screen
     lv_screen_load_anim(objects.main_screen, LV_SCR_LOAD_ANIM_NONE, 300, 0, false);
 
@@ -438,6 +475,31 @@ void TFTView_320x240::init_screens(void)
     {
         lv_obj_add_flag(objects.progmode_button, LV_OBJ_FLAG_HIDDEN);
     }
+
+    lv_obj_add_flag(objects.basic_settings_modem_preset_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_modem_preset_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_wifi_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_wifi_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_timeout_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_timeout_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_screen_lock_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_screen_lock_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_alert_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_alert_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_language_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_language_button, LV_OBJ_FLAG_IGNORE_LAYOUT);
+    lv_obj_add_flag(objects.basic_settings_language_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_language_label, LV_OBJ_FLAG_IGNORE_LAYOUT);
+    lv_obj_add_flag(objects.basic_settings_timezone_button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_timezone_button, LV_OBJ_FLAG_IGNORE_LAYOUT);
+    lv_obj_add_flag(objects.basic_settings_timezone_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.basic_settings_timezone_label, LV_OBJ_FLAG_IGNORE_LAYOUT);
+    lv_obj_add_flag(objects.settings_modem_preset_panel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.settings_wifi_panel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.settings_screen_timeout_panel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.settings_screen_lock_panel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.settings_alert_buzzer_panel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.settings_language_panel, LV_OBJ_FLAG_HIDDEN);
 
     // signal scanner scale
 #if defined(USE_SX127x)
